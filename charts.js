@@ -9,7 +9,14 @@ document.getElementById('prediction-form').addEventListener('submit', async func
     return;
   }
 
+  // Show loading state
+  const button = document.querySelector('.btn-accent');
+  const originalText = button.textContent;
+  button.textContent = 'Predicting...';
+  button.disabled = true;
+
   try {
+    // Use relative URL for Render
     const res = await fetch('/predict', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -28,10 +35,10 @@ document.getElementById('prediction-form').addEventListener('submit', async func
 
     // Fill result section
     document.getElementById('result').innerHTML = `
-      <h5>Prediction for ${ticker} on ${date}:</h5>
+      <h5>Prediction for ${ticker}:</h5>
       <p><strong>Predicted Close:</strong> $${data.predicted_price}</p>
       <p><strong>Last Close:</strong> $${data.last_close}</p>
-      <p><strong>Change:</strong> ${data.pct_change}%</p>
+      <p><strong>Change:</strong> <span class="${data.pct_change >= 0 ? 'text-success' : 'text-danger'}">${data.pct_change}%</span></p>
       <p><strong>Signal:</strong>
         <span class="badge bg-${
           data.signal === 'Buy'  ? 'success' :
@@ -50,7 +57,13 @@ document.getElementById('prediction-form').addEventListener('submit', async func
       data: {
         labels: data.dates,
         datasets: [
-          
+          {
+            label: 'Close Price',
+            data: data.close,
+            borderColor: 'blue',
+            borderWidth: 2,
+            fill: false
+          },
           {
             label: 'SMA 20',
             data: data.sma20,
@@ -90,21 +103,13 @@ document.getElementById('prediction-form').addEventListener('submit', async func
           x: {
             title: {
               display: true,
-              text: 'Date',
-              color: '#ccc'
-            },
-            ticks: {
-              color: '#ccc'
+              text: 'Date'
             }
           },
           y: {
             title: {
               display: true,
-              text: 'Price ($)',
-              color: '#ccc'
-            },
-            ticks: {
-              color: '#ccc'
+              text: 'Price ($)'
             }
           }
         }
@@ -114,5 +119,9 @@ document.getElementById('prediction-form').addEventListener('submit', async func
   } catch (err) {
     alert("Error: " + err.message);
     document.getElementById('result').innerHTML = `<p class="text-danger">${err.message}</p>`;
+  } finally {
+    // Reset button
+    button.textContent = originalText;
+    button.disabled = false;
   }
 });

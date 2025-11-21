@@ -14,8 +14,8 @@
   <!-- Bootstrap Icons (for stock/graph icon) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="../static/style.css" />
+  <!-- Custom Styles - UPDATED PATH -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
   <!-- Inline Theme Styles -->
   <style>
@@ -126,7 +126,7 @@
     });
   </script>
 
-  <!-- Main App Logic -->
-  <script src="../static/charts.js"></script>
+  <!-- Main App Logic - UPDATED PATH -->
+  <script src="{{ url_for('static', filename='charts.js') }}"></script>
 </body>
 </html>

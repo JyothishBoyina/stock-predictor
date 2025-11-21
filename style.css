@@ -1,15 +1,15 @@
 :root {
-  --bg-light:     #ffffff;  /* white background */
-  --bg-dark:      #1a1a1a;  /* dark gray */
-  --text-light:   #333333;  /* dark slate */
-  --text-dark:    #f0f0f0;  /* light gray */
-  --accent:       #007bff;  /* bootstrap blue */
-  --accent-hover: #0056b3;  /* darker blue */
-  --sell-color:   #ff5722;  /* vibrant red-orange */
-  --hold-color:   #607d8b;  /* cool blue-gray */
-  --card-light:   #f8f9fa;  /* light card background */
-  --card-dark:    #3a3a3a;  /* updated dark card background (changed from #2c2c2c) */
-  --border-color: #ced4da;  /* light gray for borders */
+  --bg-light:     #ffffff;
+  --bg-dark:      #1a1a1a;
+  --text-light:   #333333;
+  --text-dark:    #f0f0f0;
+  --accent:       #007bff;
+  --accent-hover: #0056b3;
+  --sell-color:   #ff5722;
+  --hold-color:   #607d8b;
+  --card-light:   #f8f9fa;
+  --card-dark:    #3a3a3a;
+  --border-color: #ced4da;
 }
 
 body {
@@ -83,6 +83,13 @@ h1, h2, h3, h4 {
   margin-bottom: 0.5rem;
 }
 
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4 {
+  color: var(--text-dark);
+}
+
 p {
   line-height: 1.6;
   margin-bottom: 1rem;
@@ -97,9 +104,17 @@ p {
     width: 100%;
   }
 }
+
 canvas {
   width: 100% !important;
   height: 400px !important;
   max-height: 500px;
 }
 
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
